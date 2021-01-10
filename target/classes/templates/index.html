@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+    <title>Bamboo105</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+
+    <!--导航-->
+    <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h1 class="ui teal header item">Xan</h1>
+                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==1}?'active'"><i class="home icon"></i>首页</a>
+                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==2}?'active'"><i class="idea icon"></i>分类</a>
+                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==3}?'active'"><i class="tags icon"></i>标签</a>
+                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==4}?'active'"><i class="clone icon"></i>归档</a>
+                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==5}?'active'"><i class="info icon"></i>关于我</a>
+                <div class="right m-item item m-mobile-hide">
+                    <div class="ui icon inverted transparent input">
+                        <input type="text" placeholder="Search">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ui menu toggle black icon button m-mobile-show" style="position:absolute; top:0; right:0;">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <!--中间内容-->
+    <div class="m-container m-padded-tb-large">
+        <div class="ui container">
+            <div class="ui stackable grid">
+                <!-- 左边博客列表 -->
+                <div class="eleven wide column">
+                    <!--header-->
+                    <div class="ui top attached segment">
+                        <div class="ui middle aligned two column grid">
+                            <div class="column">
+                                <h2 class="ui teal header">Blogs</h2>
+                            </div>
+                            <div class="right aligned column">
+                                共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}">14</h2> 篇
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--content-->
+                    <div class="ui attached segment">
+
+                        <div class="ui padded vertical segment" th:each="blog : ${page.content}">
+                            <div class="ui middle aligned mobile reversed stackable grid" >
+                                <div class="eleven wide column">
+                                    <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">标题1</a></h3>
+                                    <p class="m-opacity-mini" th:text="|${blog.description}......|">文章描述description</p>
+                                    <div class="ui grid">
+                                        <div class="eleven wide column">
+                                            <div class="ui horizontal link list">
+                                                <div class="item">
+                                                    <img src="https://source.unsplash.com/WiONHd_zYI4/180x125" th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">
+                                                    <div class="content"><a href="#" clas="header" th:text="${blog.user.nickname}" >Bamboo</a></div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2017-10-01</span>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="eye icon"></i> <span th:text="${blog.views}">2342</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="right aligned five wide column">
+                                            <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}">认知升级</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui five wide column">
+                                    <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                                        <img src="https://source.unsplash.com/WiONHd_zYI4/650x430" th:src="@{${blog.firstPicture}}"  alt="" class="ui rounded image">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/*-->
+                        <div class="ui padded vertical segment">
+                            <div class="ui mobile reversed stackable grid">
+                                <div class="eleven wide column">
+                                    <h3 class="ui header">你真的以为你还来得及吗？</h3>
+                                    <p class="m-opacity-mini">唧唧复唧唧，木兰当户织。不闻机杼声，唯闻女叹息。问女何所思？问女何所忆？女亦无所思，女亦无所忆。昨夜见军帖，可汗大点兵，军书十二卷，卷卷有爷名。阿爷无大儿，木兰无长兄，愿为市鞍马，从此替爷征。</p>
+                                    <div class="ui grid">
+                                        <div class="eleven wide column">
+                                            <div class="ui horizontal link list">
+                                                <div class="item">
+                                                    <img src="https://source.unsplash.com/user/xan365/likes" alt="" class="ui avatar image">
+                                                    <div class="content"><a href="#" clas="header">Bamboo</a></div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="calender icon"></i> 2020-6-24
+                                                </div>
+                                                <div class="item">
+                                                    <i class="eye icon"></i> 103
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="right aligned five wide column">
+                                            <a href="#" target="_blank" class="ui teal basic label m-padded-mini m-text-thin">自我革新</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui five wide column">
+                                    <a href="#" target="blank">
+                                        <img src="https://source.unsplash.com/WLUHO9A_xik/650x430" alt="" class="ui rounded image">
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui padded vertical segment">
+                            <div class="ui mobile reversed stackable grid">
+                                <div class="eleven wide column">
+                                    <h3 class="ui header">你真的以为你还来得及吗？</h3>
+                                    <p class="m-opacity-mini">唧唧复唧唧，木兰当户织。不闻机杼声，唯闻女叹息。问女何所思？问女何所忆？女亦无所思，女亦无所忆。昨夜见军帖，可汗大点兵，军书十二卷，卷卷有爷名。阿爷无大儿，木兰无长兄，愿为市鞍马，从此替爷征。</p>
+                                    <div class="ui grid">
+                                        <div class="eleven wide column">
+                                            <div class="ui horizontal link list">
+                                                <div class="item">
+                                                    <img src="https://source.unsplash.com/WiONHd_zYI4/180x125" alt="" class="ui avatar image">
+                                                    <div class="content"><a href="#" clas="header">Bamboo</a></div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="calender icon"></i> 2020-6-24
+                                                </div>
+                                                <div class="item">
+                                                    <i class="eye icon"></i> 103
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="right aligned five wide column">
+                                            <a href="#" target="_blank" class="ui teal basic label m-padded-mini m-text-thin">自我革新</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui five wide column">
+                                    <a href="#" target="blank">
+                                        <img src="https://source.unsplash.com/WiONHd_zYI4/180x125" alt="" class="ui rounded image">
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui padded vertical segment">
+                            <div class="ui mobile reversed stackable grid">
+                                <div class="eleven wide column">
+                                    <h3 class="ui header">你真的以为你还来得及吗？</h3>
+                                    <p class="m-opacity-mini">唧唧复唧唧，木兰当户织。不闻机杼声，唯闻女叹息。问女何所思？问女何所忆？女亦无所思，女亦无所忆。昨夜见军帖，可汗大点兵，军书十二卷，卷卷有爷名。阿爷无大儿，木兰无长兄，愿为市鞍马，从此替爷征。</p>
+                                    <div class="ui grid">
+                                        <div class="eleven wide column">
+                                            <div class="ui horizontal link list">
+                                                <div class="item">
+                                                    <img src="https://source.unsplash.com/WiONHd_zYI4/180x125" alt="" class="ui avatar image">
+                                                    <div class="content"><a href="#" clas="header">Bamboo</a></div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="calender icon"></i> 2020-6-24
+                                                </div>
+                                                <div class="item">
+                                                    <i class="eye icon"></i> 103
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="right aligned five wide column">
+                                            <a href="#" target="_blank" class="ui teal basic label m-padded-mini m-text-thin">自我革新</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui five wide column">
+                                    <a href="#" target="blank">
+                                        <img src="https://source.unsplash.com/WiONHd_zYI4/180x125" alt="" class="ui rounded image">
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui padded vertical segment">
+                            <div class="ui mobile reversed stackable grid">
+                                <div class="eleven wide column">
+                                    <h3 class="ui header">你真的以为你还来得及吗？</h3>
+                                    <p class="m-opacity-mini">唧唧复唧唧，木兰当户织。不闻机杼声，唯闻女叹息。问女何所思？问女何所忆？女亦无所思，女亦无所忆。昨夜见军帖，可汗大点兵，军书十二卷，卷卷有爷名。阿爷无大儿，木兰无长兄，愿为市鞍马，从此替爷征。</p>
+                                    <div class="ui grid">
+                                        <div class="eleven wide column">
+                                            <div class="ui horizontal link list">
+                                                <div class="item">
+                                                    <img src="https://source.unsplash.com/WiONHd_zYI4/180x125" alt="" class="ui avatar image">
+                                                    <div class="content"><a href="#" clas="header">Bamboo</a></div>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="calender icon"></i> 2020-6-24
+                                                </div>
+                                                <div class="item">
+                                                    <i class="eye icon"></i> 103
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="right aligned five wide column">
+                                            <a href="#" target="_blank" class="ui teal basic label m-padded-mini m-text-thin">自我革新</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui five wide column">
+                                    <a href="#" target="blank">
+                                        <img src="https://source.unsplash.com/WiONHd_zYI4/180x125" alt="" class="ui rounded image">
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--*/-->
+                    </div>
+
+                    <!--footer-->
+                    <div class="ui bottom attached segment"  th:if="${page.totalPages}>1">
+                        <div class="ui middle aligned two column grid">
+                            <div class="column">
+                                <a href="#" th:href="@{/(page=${page.number}-1)}"  th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
+                            </div>
+                            <div class="right aligned column">
+                                <a href="#" th:href="@{/(page=${page.number}+1)}"  th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- 右边的top -->
+                <div class="five wide column">
+                    <!-- 分类 -->
+                    <div class="ui segments">
+                        <div class="ui secondary segment">
+                            <div class="ui two column grid">
+                                <div class="column">
+                                    <i class="idea icon"></i>分类
+                                </div>
+                                <div class="right aligned column">
+                                    <a href="#" th:href="@{types/-1}" target="_blank">more <i class="angle double right icon"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui teal segment">
+                            <dic class="ui fluid vertical menu">
+                                <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item" th:each="type : ${types}">
+                                    <span th:text="${type.name}">学习日志</span>
+                                    <div class="ui teal basic left pointing label" th:text="${#lists.size(type.blogs)}">13</div>
+                                </a>
+                                <!--/*-->
+                                <a href="#" target="_blank" class="item">
+                                    学习日志
+                                    <div class="ui teal basic left pointing label">13</div>
+                                </a>
+                                <a href="#" target="_blank" class="item">
+                                    学习日志
+                                    <div class="ui teal basic left pointing label">13</div>
+                                </a>
+                                <a href="#" target="_blank" class="item">
+                                    学习日志
+                                    <div class="ui teal basic left pointing label">13</div>
+                                </a>
+                                <a href="#" target="_blank" class="item">
+                                    学习日志
+                                    <div class="ui teal basic left pointing label">13</div>
+                                </a>
+                                <!--*/-->
+                            </dic>
+                        </div>
+                    </div>
+
+                    <!-- 标签 -->
+                    <div class="ui segments">
+                        <div class="ui secondary segment">
+                            <div class="ui two column grid">
+                                <div class="column">
+                                    <i class="tags icon"></i>标签
+                                </div>
+                                <div class="right aligned column">
+                                    <a href="#" th:href="@{tags/-1}" target="_blank">more...</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui teal segment">
+                            <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" target="_blank" class="ui teal basic left pointing end label m-opacity-mini" style="margin-top:7px!important" th:each="tag : ${tags}">
+                                <span th:text="${tag.name}">学习日志</span>
+                                <div class="detail" th:text="${#lists.size(tag.blogs)}">24</div>
+                            </a>
+                            <!--/*-->
+                            <a href="#" target="_blank" class="ui teal basic left pointing label m-opacity-mini" style="margin-top:7px!important">
+                                方法论2
+                                <div class="detail">24</div>
+                            </a>
+                            <a href="#" target="_blank" class="ui teal basic left pointing label m-opacity-mini" style="margin-top:7px!important">
+                                方法论3
+                                <div class="detail">24</div>
+                            </a>
+                            <a href="#" target="_blank" class="ui teal basic left pointing label m-opacity-mini" style="margin-top:7px!important">
+                                方法论4
+                                <div class="detail">24</div>
+                            </a>
+                            <a href="#" target="_blank" class="ui teal basic left pointing label m-opacity-mini" style="margin-top:7px!important">
+                                方法论4
+                                <div class="detail">24</div>
+                            </a>
+                            <!--*/-->
+                        </div>
+
+                    </div>
+
+
+                    <!-- 最新推荐 -->
+                    <div class="ui segments">
+                        <div class="ui secondary segment">
+                            <i class="bookmark icon"></i>最新推荐
+                        </div>
+                        <div class="ui segment" th:each="blog : ${recBlogs}">
+                            <a href="#" th:href="@{blog/{id}/(id=${blog.id})}" target="_blank" style="color:#333 !important" th:text="${blog.title}"}>用户故事（user story）</a>
+                        </div>
+                        <!--/*-->
+                        <div class="ui segment">
+                            <a href="#" target="_blank" style="color:#333 !important">用户故事（user story）</a>
+                        </div>
+                        <div class="ui segment">
+                            <a href="#" target="_blank" style="color:#333 !important">用户故事（user story）</a>
+                        </div>
+                        <!--*/-->
+                    </div>
+
+                    <!-- 二维码 -->
+                    <h4 class="ui horizontal divider header m-opacity-mini">扫码添加</h4>
+                    <div class="ui centered card"  style="width: 13em">
+                        <img src="../static/images/Wechatcode.jpeg" th:src="@{/images/Wechatcode.jpeg}" alt="" class="ui rounded image">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--footer-->
+    <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <img src="../static/images/Wechatcode.jpeg" th:src="@{/images/Wechatcode.jpeg}" class="ui rounded" alt="" style="width: 120px">
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-space">最新发布</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">最新一</a>
+                        <a href="#" class="item">最新二</a>
+                        <a href="#" class="item">最新三</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-space">欢迎联系</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">email: xan@usc.edu</a>
+                        <a href="#" class="item">QQ: 645363297</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-space">关于Xan</h4>
+                    <p class="m-text-thin m-text-space m-opacity-mini">这里是我的个人博客，会写一些随笔或者编程心得。希望可以对来到这里的你有所帮助～！</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-space m-opacity-mini">Copyright @ 2020-2021 Xan Designed by Xan</p>
+        </div>
+    </footer>
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
+
+    <script>
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-hide');
+        });
+    </script>
+</body>
+</html>
